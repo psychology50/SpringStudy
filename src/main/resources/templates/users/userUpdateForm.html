@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>회원 수정</title>
+</head>
+<body>
+<div class="container">
+  <!--/*@thymesVar id="userDomain" type="Likelion.SpringStudy.domain.UserDomain"*/-->
+  <form th:action="@{/users/register}" th:object="${userForm}" method="post">
+    <div class="userDomain-form">
+      <input id="id" name="id" th:value="${user.id}" type="hidden" />
+      <label for="name">이름</label>
+      <input id="name" name="username" th:value="${user.username}"  placeholder="이름을 입력하시오" type="text"><br/>
+      <label for="email">닉네임</label>
+      <input id="nickname" name="nickname" th:value="${user.nickname}" placeholder="닉네임을 입력하시오" type="text"><br/>
+      <label for="password">비밀번호</label>
+      <input id="password" name="password" th:value="${user.password}" placeholder="비밀번호를 입력하세요" type="password"><br/>
+      <label for="email">이메일</label>
+      <input id="email" name="email" th:value="${user.email}" placeholder="이메일을 입력하시오" type="text"><br/>
+      <label for="email">전화번호</label>
+      <input id="phone" name="phone" th:value="${user.phone}" placeholder="전화번호를 입력하시오" type="text"><br/>
+    </div>
+    <button type="submit">정보 수정</button>
+  </form>
+</div>
+</body>
+</html>

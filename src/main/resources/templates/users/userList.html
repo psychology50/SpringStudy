@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>유저목록</title>
+    <style>
+      table {
+        width: 100%;
+        border: 1px solid #444444;
+        border-collapse: collapse;
+      }
+      th, td {
+        border: 1px solid #444444;
+        padding: 15px;
+      }
+    </style>
+</head>
+<body>
+  <div class="container">
+    <table>
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>name</th>
+          <th>nickname</th>
+          <th>email</th>
+          <th>phone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="user : ${users}">
+          <td th:text="${user.id}" ></td>
+          <td><a th:text="${user.username}" th:href="@{'/users/' + ${user.id} + '/update'}"></a></td>
+          <td th:text="${user.nickname}"></td>
+          <td th:text="${user.email}"></td>
+          <td th:text="${user.phone}"></td>
+        </tr>
+      </tbody>
+    </table>
+    <h3>* 수정하고 싶은 회원의 이름을 클릭하시오.</h3>
+  </div>
+</body>
+</html>

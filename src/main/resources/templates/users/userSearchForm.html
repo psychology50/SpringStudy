@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>유저 검색</title>
+    <style>
+        table {
+            width: 100%;
+            border: 1px solid #444444;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #444444;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form th:action="@{/users/receive}" method="post">
+            <label>닉네임 : </label>
+            <input type="text" name="nickname" placeholder="찾고자하는 닉네임을 입력해주세요." required><br/>
+            <button type="submit">검색</button>
+        </form>
+
+        <!--/*@thymesVar id="userDomain" type="Likelion.SpringStudy.domain.UserDomain"*/-->
+        <div th:if = "${#strings.isEmpty(user.nickname)}">
+            <h2>정보가 존재하지 않습니다.</h2>
+        </div>
+
+        <table th:if = "${not#strings.isEmpty(user.nickname)}">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>email</th>
+                <th>phone</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.username}"></td>
+                <td th:text="${user.email}"></td>
+                <td th:text="${user.phone}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

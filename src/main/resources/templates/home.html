@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <div class="container">
+    <h2>회원 기능</h2>
+    <div>
+      <a href="/users/register">회원 가입</a> <!-- CREATE -->
+      <a href="/users">회원 목록</a> <!-- LIST -->
+      <a href="/users/receive">회원 검색</a> <!-- RECEIVE -->
+      <a href="/users/delete">회원 삭제</a> <!-- DELETE -->
+      <br/>
+
+      <a href="/login" sec:authorize="isAnonymous()">로그인</a>
+      <p sec:authorize="isAuthenticated()">로그인했다면 보이는 글..</p>
+      <p sec:authorize="isAuthenticated()" ><a th:href="@{/logout}">로그아웃</a></p>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  # database
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3330/SpringStudy?serverTimezone=UTC&characterEncoding=utf8
+    username: root
+    password: aespa0519
+  #jpa
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+#  #jwt
+#  security:
+#    jwt:
+#      header: Authorization
+#      secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
+#      token-validity-in-seconds: 86400
+  # thymeleaf
+  thymeleaf:
+    prefix: classpath:templates/
+    check-template-location: true
+    suffix: .html
+    cache: false
+
+
+
+logging:
+  level:
+    org.hibernate.sql: debug
+    org.hibernate.type: trace
+
+## mybatis
+#mybatis:
+#  config: mybatis-config.xml
+#  type-aliases-package: com.example.demo.model
+#  mapper-locations: mybatis/mapper/*.xml
