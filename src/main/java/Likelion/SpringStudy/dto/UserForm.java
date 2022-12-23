@@ -1,5 +1,6 @@
 package Likelion.SpringStudy.dto;
 
+import Likelion.SpringStudy.domain.RoleType;
 import Likelion.SpringStudy.domain.UserDomain;
 import lombok.Builder;
 import lombok.Data;
@@ -38,7 +39,7 @@ public class UserForm {
                 .password(new BCryptPasswordEncoder().encode(password))
                 .email(email)
                 .phone(phone)
-                .role("ROLE_USER")
+                .role(RoleType.USER)
                 .build();
     }
 }

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CreateBlog</title>
+</head>
+<body>
+<div class="container">
+  <h1>블로그 생성</h1>
+  <form th:action="@{/blogs/create}" th:object="${BlogForm}" method="post">
+    <div class="userDomain-form">
+      <label for="name">이름</label>
+      <input id="name" th:field="*{blog_name}" placeholder="이름을 입력하시오" type="text"><br/>
+    </div>
+    <button type="submit">회원가입</button>
+  </form>
+</div>
+</body>
+</html>

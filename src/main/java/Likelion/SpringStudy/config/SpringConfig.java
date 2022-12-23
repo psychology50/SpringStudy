@@ -1,5 +1,7 @@
 package Likelion.SpringStudy.config;
 
+import Likelion.SpringStudy.repository.BlogRepository;
+import Likelion.SpringStudy.repository.BlogRepositoryInterface;
 import Likelion.SpringStudy.repository.UserRepository;
 import Likelion.SpringStudy.repository.UserRepositoryInterface;
 import Likelion.SpringStudy.service.UserService;
@@ -31,4 +33,6 @@ public class SpringConfig {
         return new UserRepository(em);
     }
 
+    @Bean
+    public BlogRepositoryInterface blogRepositoryInterface() {return new BlogRepository(em); }
 }

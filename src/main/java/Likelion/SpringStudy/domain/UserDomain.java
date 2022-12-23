@@ -3,32 +3,45 @@ package Likelion.SpringStudy.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Date;
 
-@Getter
 @Entity(name="user")
+@Table(name="USER")
 @Data
+@Getter
 public class UserDomain {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="USER_ID")
     private Long id;
 
-    @Column(name = "username")
+    @Column(name = "username") @NonNull
     private String username;
-    @Column(name = "nickname")
+    @Column(name = "nickname", length = 15, unique = true) @NonNull
     private String nickname;
-    @Column(name = "password")
+    @Column(name = "password") @NonNull
     private String password;
-    @Column(name = "email")
+    @Column(name = "email") @NonNull
     private String email;
-    @Column(name = "phone")
+    @Column(name = "phone") @NonNull
     private String phone;
-    @Column(name = "role")
-    private String role;
+
+    @Enumerated(EnumType.STRING)
+    private RoleType role;
+
+//    @Temporal(TemporalType.TIMESTAMP)
+//    private Date createdDate;
+//
+//    @Temporal(TemporalType.TIMESTAMP)
+//    private Date lastModifiedDate;
+
+    @OneToOne(mappedBy = "userDomain")
+    private Blog blog;
 
     public UserDomain() {}
 
     @Builder
     public UserDomain(Long id, String username, String nickname, String password,
-                      String email, String phone, String role)
+                      String email, String phone, RoleType role)
     {
         this.id = id;
         this.username = username;
@@ -40,3 +53,4 @@ public class UserDomain {
     }
 
 }
+

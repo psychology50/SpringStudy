@@ -24,7 +24,7 @@ public class CustomUserDetailsService implements UserDetailsService {
                 new UsernameNotFoundException("해당 닉네임을 찾을 수 없습니다."));
 
         List<GrantedAuthority> roles = new ArrayList<>();
-        roles.add(new SimpleGrantedAuthority(userDomain.getRole()));
+        roles.add(new SimpleGrantedAuthority(userDomain.getRole().toString()));
 
         return new UserContext(userDomain, roles);
     }
