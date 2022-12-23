@@ -31,7 +31,7 @@ public class Blog {
         this.blog_name = blog_name;
     }
 
-    public void setUser(UserDomain user) {
+    public void setOwner(UserDomain user) {
         this.owner = user;
         user.setBlog(this);
     }

@@ -1,6 +1,7 @@
 package Likelion.SpringStudy.repository;
 
 import Likelion.SpringStudy.domain.Blog;
+import Likelion.SpringStudy.domain.UserDomain;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.util.Assert;
 
@@ -12,7 +13,7 @@ public class BlogRepository implements BlogRepositoryInterface{
     public BlogRepository(EntityManager em) {this.em = em;}
 
     @Override
-    public Blog save(Blog blog, Long user_id) {
+    public Blog save(Blog blog) {
         if (blog.getId() == null) {
             em.persist(blog);
             return blog;
