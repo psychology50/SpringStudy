@@ -3,10 +3,8 @@ package Likelion.SpringStudy.service;
 import Likelion.SpringStudy.domain.Blog;
 import Likelion.SpringStudy.domain.UserDomain;
 import Likelion.SpringStudy.dto.BlogForm;
-import Likelion.SpringStudy.repository.BlogRepository;
 import Likelion.SpringStudy.repository.BlogRepositoryInterface;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,8 +26,9 @@ public class BlogService {
     public Long create(BlogForm form, UserDomain userDomain) {
         Blog blog = form.toEntity();
         if (blog.getId() == null) {
-            blog.setOwner(userDomain);
             validateDuplicateBlog(blog);
+            // 블로그 이미 있을 시, 예외처리 코드 추가
+            blog.setOwner(userDomain);
         }
         blogRepositoryInterface.save(blog);
         return blog.getId();

@@ -6,7 +6,9 @@ import Likelion.SpringStudy.domain.UserDomain;
 import Likelion.SpringStudy.dto.BlogForm;
 import Likelion.SpringStudy.service.BlogService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,9 +26,9 @@ public class BlogController {
     }
 
     @PostMapping("/blogs/create")
-    public String create(BlogForm form,
-                         @AuthenticationPrincipal UserContext userContext) {
-        blogService.create(form, userContext.getUser());
+    public String create(BlogForm form, Authentication authentication) {
+        UserDomain userDomain = (UserDomain) authentication.getPrincipal();
+        blogService.create(form, userDomain);
         return "redirect:/";
     }
 }

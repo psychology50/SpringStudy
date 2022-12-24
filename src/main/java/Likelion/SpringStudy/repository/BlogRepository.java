@@ -6,6 +6,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 import java.util.Optional;
 
 public class BlogRepository implements BlogRepositoryInterface{
@@ -30,8 +31,10 @@ public class BlogRepository implements BlogRepositoryInterface{
 
     @Override
     public Optional<Blog> findByName(String name) {
-        Blog blog = em.find(Blog.class, name);
-        return Optional.ofNullable(blog);
+        List<Blog> result = em.createQuery("select b from blog b where b.blog_name = :name", Blog.class)
+                .setParameter("name", name)
+                .getResultList();
+        return result.stream().findAny();
     }
 
     @Override

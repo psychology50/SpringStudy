@@ -3,12 +3,14 @@ package Likelion.SpringStudy.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity(name="user")
 @Table(name="USER")
-@Data
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserDomain {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="USER_ID")
@@ -34,10 +36,17 @@ public class UserDomain {
 //    @Temporal(TemporalType.TIMESTAMP)
 //    private Date lastModifiedDate;
 
-    @OneToOne(mappedBy = "userDomain")
+    @OneToOne(mappedBy = "owner")
+    @ToString.Exclude
     private Blog blog;
 
-    public UserDomain() {}
+    @OneToMany(mappedBy = "user")
+    @ToString.Exclude
+    private List<Like> likes = new ArrayList<Like>();
+
+    @OneToMany(mappedBy = "user")
+    @ToString.Exclude
+    private List<Comment> comments = new ArrayList<>();
 
     @Builder
     public UserDomain(Long id, String username, String nickname, String password,
@@ -52,5 +61,8 @@ public class UserDomain {
         this.role = role;
     }
 
+    public void setBlog(Blog blog) {
+        this.blog = blog;
+    }
 }
 

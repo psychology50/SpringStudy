@@ -1,15 +1,16 @@
 package Likelion.SpringStudy.domain;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name="blog")
-@Data
+@Table(name="BLOG")
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Blog {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "BLOG_ID")
@@ -23,7 +24,8 @@ public class Blog {
     @JoinColumn(name="USER_ID")
     private UserDomain owner;
 
-    public Blog() {}
+    @OneToMany(mappedBy = "blog")
+    private List<Post> posts = new ArrayList<Post>();
 
     @Builder
     public Blog(Long id, String blog_name) {
