@@ -10,7 +10,7 @@ import java.util.List;
 @Entity(name="blog")
 @Table(name="BLOG")
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+//@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Blog {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "BLOG_ID")
@@ -31,6 +31,10 @@ public class Blog {
     public Blog(Long id, String blog_name) {
         this.id = id;
         this.blog_name = blog_name;
+    }
+
+    public Blog() {
+
     }
 
     public void setOwner(UserDomain user) {

@@ -23,6 +23,9 @@ public class Post {
     @Column(name="content", columnDefinition = "LONGTEXT")
     private String content;
 
+    @Column(name="like_cnt")
+    private Integer like_cnt = 0;
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
 

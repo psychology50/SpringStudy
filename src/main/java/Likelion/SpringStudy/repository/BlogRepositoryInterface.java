@@ -11,4 +11,5 @@ public interface BlogRepositoryInterface {
     Optional<Blog> findByName(String name);
     void delete(Blog blog);
     void deleteById(Long id);
+    Optional<Blog> findByUserId(Long user_id);
 }

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>내 블로그</title>
+</head>
+<body>
+  <div class="container">
+    <table>
+      <thead>
+        <th>id</th>
+        <th>blog_name</th>
+        <th>owner</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td th:text="${blog.id}"></td>
+          <td th:text="${blog.blog_name}"></td>
+          <td th:text="${blog.owner}"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

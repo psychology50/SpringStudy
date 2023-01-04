@@ -15,6 +15,9 @@ spring:
     properties:
       hibernate:
         format_sql: true
+    defer-datasource-initialization: true
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
   #  #jwt
 #  security:
 #    jwt:

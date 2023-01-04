@@ -16,11 +16,20 @@
       <a href="/users">회원 목록</a> <!-- LIST -->
       <a href="/users/receive">회원 검색</a> <!-- RECEIVE -->
       <a href="/users/delete">회원 삭제</a> <!-- DELETE -->
-      <br/>
+      <br/><hr/>
+
+      <p sec:authorize="isAuthenticated()"><a th:href="@{/blogs/create}">블로그 생성</a></p>
+      <div sec:authorize="isAuthenticated()" th:if="${not#strings.isEmpty(blog)}">
+        <p th:text="${blog.blog_name}"/>
+        <p th:if = "${not#strings.isEmpty(blog.id)}">
+          <a th:text="${blog.blog_name}" th:href="@{'/blogs/' + ${blog.id} + '/receive'}"/>
+        </p>
+      </div>
+      <br/><hr/>
 
       <a href="/login" sec:authorize="isAnonymous()">로그인</a>
-      <p sec:authorize="isAuthenticated()"><a th:href="@{/blogs/create}">블로그 생성</a></p>
       <p sec:authorize="isAuthenticated()" ><a th:href="@{/logout}">로그아웃</a></p>
+
     </div>
   </div>
 </body>

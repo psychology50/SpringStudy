@@ -49,4 +49,10 @@ public class BlogRepository implements BlogRepositoryInterface{
         delete(findById(id).orElseThrow(() -> new EmptyResultDataAccessException(
                 String.format("No Blog entity exists!"), 1)));
     }
+
+    @Override
+    public Optional<Blog> findByUserId(Long user_id) {
+        Blog blog = em.find(Blog.class, user_id);
+        return Optional.ofNullable(blog);
+    }
 }
