@@ -33,12 +33,16 @@ public class Blog {
         this.blog_name = blog_name;
     }
 
-    public Blog() {
-
-    }
+    public Blog() {}
 
     public void setOwner(UserDomain user) {
+        if (this.owner != null) {
+            this.owner = null;
+        }
         this.owner = user;
-        user.setBlog(this);
+
+        if (user != null) {
+            user.setBlog(this);
+        }
     }
 }

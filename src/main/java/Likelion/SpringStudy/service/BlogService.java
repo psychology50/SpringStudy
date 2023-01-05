@@ -27,6 +27,7 @@ public class BlogService {
 
     private void isPresent(UserDomain userDomain) {
         Blog blog = userDomain.getBlog();
+        System.out.println(blog);
         if (blog != null) {
             throw new IllegalStateException("이미 블로그를 소유하고 있습니다.");
         }
@@ -51,4 +52,7 @@ public class BlogService {
         return blogRepositoryInterface.findByUserId(user_id);
     }
 
+    public void deleteBlog(Long id) {
+        blogRepositoryInterface.deleteById(id);
+    }
 }

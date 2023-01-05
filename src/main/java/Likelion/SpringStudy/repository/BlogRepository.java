@@ -40,6 +40,7 @@ public class BlogRepository implements BlogRepositoryInterface{
     @Override
     public void delete(Blog blog) {
         Assert.notNull(blog, "블로그가 존재해야 합니다.");
+        blog.setOwner(null);
         em.remove(blog);
     }
 

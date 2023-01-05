@@ -21,6 +21,14 @@
         </tr>
       </tbody>
     </table>
+
+    <form th:action="@{'/blogs/' + ${blog.id} + '/delete'}" th:object="${blogForm}" method="post">
+      <input id="name" th:field="*{blog_name}" hidden/>
+      <button type="submit">블로그 삭제</button>
+    </form>
+
+
+    </form>
   </div>
 </body>
 </html>

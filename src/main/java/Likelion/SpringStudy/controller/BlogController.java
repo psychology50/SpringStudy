@@ -34,6 +34,13 @@ public class BlogController {
     public String receive(@PathVariable(value="blog_id") String blog_id, Model model) {
         Blog blog = blogService.findBlog(Long.parseLong(blog_id)).get();
         model.addAttribute("blog", blog);
+        model.addAttribute("blogForm", new BlogForm());
         return "blogs/blogReceive";
+    }
+
+    @PostMapping("/blogs/{blog_id}/delete")
+    public String delete(@PathVariable(value="blog_id") String blog_id) {
+        blogService.deleteBlog(Long.parseLong(blog_id));
+        return "home";
     }
 }
