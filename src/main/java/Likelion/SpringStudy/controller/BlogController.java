@@ -6,6 +6,7 @@ import Likelion.SpringStudy.dto.BlogForm;
 import Likelion.SpringStudy.service.BlogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,8 +40,10 @@ public class BlogController {
     }
 
     @PostMapping("/blogs/{blog_id}/delete")
-    public String delete(@PathVariable(value="blog_id") String blog_id) {
+    public String delete(@PathVariable(value="blog_id") String blog_id, Authentication authentication) {
         blogService.deleteBlog(Long.parseLong(blog_id));
+        UserDomain userDomain = (UserDomain) authentication.getPrincipal();
+        userDomain.setBlog(null);
         return "home";
     }
 }

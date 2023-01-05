@@ -36,7 +36,7 @@ public class UserDomain {
 //    @Temporal(TemporalType.TIMESTAMP)
 //    private Date lastModifiedDate;
 
-    @OneToOne(mappedBy = "owner")
+    @OneToOne(mappedBy = "owner", orphanRemoval = true)
     @ToString.Exclude
     private Blog blog;
 
