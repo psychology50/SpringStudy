@@ -1,8 +1,11 @@
 package Likelion.SpringStudy.domain;
 
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,10 +30,12 @@ public class Post {
     private Integer like_cnt = 0;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date createdDate;
+    @CreatedDate
+    private LocalDateTime createdDate;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date lastModifiedDate;
+    @LastModifiedDate
+    private LocalDateTime lastModifiedDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="BLOG_ID")
@@ -57,7 +62,5 @@ public class Post {
         this.id = id;
         this.title = title;
         this.content = content;
-        this.createdDate = createdDate;
-        this.lastModifiedDate = lastModifiedDate;
     }
 }
