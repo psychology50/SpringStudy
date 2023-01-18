@@ -1,10 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Post 작성</title>
 </head>
 <body>
-
+    <div class="container">
+        <h1>블로그 생성</h1>
+        <form th:action="@{'/blogs/' + ${blog_id} + '/posts/create'}" th:object="${postForm}" method="post">
+            <div>
+                <label for="name">제목</label>
+                <input id="name" th:field="*{title}" placeholder="게시글 제목을 입력하시오" type="text" required><br/>
+            </div>
+            <div>
+                <label for="content">내용</label>
+                <textarea id="content" placeholder="내용을 입력해주세요."></textarea><br/>
+            </div>
+            <button type="submit">글 작성</button>
+        </form>
+    </div>
 </body>
 </html>

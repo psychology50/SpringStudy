@@ -3,6 +3,7 @@ package Likelion.SpringStudy.domain;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -14,7 +15,7 @@ import java.util.List;
 @Table(name="POST")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Post {
+public class Post extends BaseEntity{
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "POST_ID")
     private Long id;
@@ -29,19 +30,11 @@ public class Post {
     @Column(name="like_cnt")
     private Integer like_cnt = 0;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
-    private LocalDateTime createdDate;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @LastModifiedDate
-    private LocalDateTime lastModifiedDate;
-
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name="BLOG_ID")
     private Blog blog;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name="CATEGORY_ID")
     private Category category;
 
@@ -58,9 +51,20 @@ public class Post {
     private List<Comment> comments = new ArrayList<>();
 
     @Builder
-    public Post(Long id, String title, String content, Date createdDate, Date lastModifiedDate) {
+    public Post(Long id, String title, String content) {
         this.id = id;
         this.title = title;
         this.content = content;
+    }
+
+    public void setBlog(Blog blog) {
+        if (this.blog != null) {
+            this.blog = null;
+        }
+        this.blog = blog;
+
+        if (blog != null) {
+            blog.getPosts().add(this);
+        }
     }
 }

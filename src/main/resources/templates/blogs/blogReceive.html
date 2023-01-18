@@ -22,11 +22,12 @@
       </tbody>
     </table>
 
+    <a th:href="@{'/blogs/' + ${blog.id} + '/posts/create'}">게시글 작성</a>
+
     <form th:action="@{'/blogs/' + ${blog.id} + '/delete'}" th:object="${blogForm}" method="post">
       <input id="name" th:field="*{blog_name}" hidden/>
       <button type="submit">블로그 삭제</button>
     </form>
-
 
     </form>
   </div>

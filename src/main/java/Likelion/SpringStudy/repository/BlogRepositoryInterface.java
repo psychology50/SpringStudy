@@ -1,7 +1,6 @@
 package Likelion.SpringStudy.repository;
 
 import Likelion.SpringStudy.domain.Blog;
-import Likelion.SpringStudy.domain.UserDomain;
 
 import java.util.Optional;
 

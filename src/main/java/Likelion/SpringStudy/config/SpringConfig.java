@@ -1,9 +1,6 @@
 package Likelion.SpringStudy.config;
 
-import Likelion.SpringStudy.repository.BlogRepository;
-import Likelion.SpringStudy.repository.BlogRepositoryInterface;
-import Likelion.SpringStudy.repository.UserRepository;
-import Likelion.SpringStudy.repository.UserRepositoryInterface;
+import Likelion.SpringStudy.repository.*;
 import Likelion.SpringStudy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -35,4 +32,7 @@ public class SpringConfig {
 
     @Bean
     public BlogRepositoryInterface blogRepositoryInterface() {return new BlogRepository(em); }
+
+    @Bean
+    public PostRepoInterface postRepoInterface() {return new PostRepo(em);}
 }
