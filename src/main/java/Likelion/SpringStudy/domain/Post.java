@@ -14,7 +14,7 @@ import java.util.List;
 @Entity(name="Post")
 @Table(name="POST")
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+//@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Post extends BaseEntity{
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "POST_ID")
@@ -55,6 +55,10 @@ public class Post extends BaseEntity{
         this.id = id;
         this.title = title;
         this.content = content;
+    }
+
+    public Post() {
+
     }
 
     public void setBlog(Blog blog) {

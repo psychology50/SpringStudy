@@ -36,7 +36,7 @@ public class UserController {
     }
 
     @GetMapping("/users/delete")
-    public String DeleteForm() {return "users/userDeleteForm";}
+    public String deleteForm() {return "users/userDeleteForm";}
 
     @PostMapping("/users/delete")
     public String delete(UserForm form) {

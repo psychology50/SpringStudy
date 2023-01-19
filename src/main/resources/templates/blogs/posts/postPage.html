@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>글 내용</title>
+</head>
+<body>
+  <div id="container">
+    <h1 th:text="${post.title}"></h1><br/>
+    <p th:text="${post.content}"></p>
+  </div>
+
+  <a th:href="@{'/blogs/' + ${post.blog.id} + '/posts/' + ${post.id} + '/update'}">게시글 수정</a>
+  <form th:action="@{'/blogs/' + ${post.blog.id} + '/posts/' + ${post.id} + '/delete'}"
+        th:object="${post}" method="post">
+    <input id="name" th:field="${post.id}" hidden/>
+    <button type="submit">게시글 삭제</button>
+  </form>
+</body>
+</html>

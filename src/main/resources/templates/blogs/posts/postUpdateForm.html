@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 수정</title>
+</head>
+<body>
+    <div class="container">
+        <!--/*@thymesVar id="post" type="Likelion.SpringStudy.domain.Post"*/-->
+        <form id="form_post_update" th:action="@{'/blogs/' + ${post.blog.id} + '/posts/create'}" th:object="${postForm}" method="post">
+            <div>
+                <input id="id" name="id" th:value="${post.id}" type="hidden"/>
+                <label for="name">제목</label>
+                <input id="name" name="title" th:value="${post.title}" type="text" required><br/>
+                <label for="content">내용</label>
+                <textarea id="content"
+                          cols="50" row="50"
+                          form="form_post_update"
+                          name="content"
+                          th:value="${post.content}"></textarea><br/>
+            </div>
+            <button type="submit">글 수정</button>
+        </form>
+    </div>
+</body>
+</html>

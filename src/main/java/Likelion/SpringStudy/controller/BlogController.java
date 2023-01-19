@@ -46,4 +46,5 @@ public class BlogController {
         userDomain.setBlog(null);
         return "home";
     }
+
 }
