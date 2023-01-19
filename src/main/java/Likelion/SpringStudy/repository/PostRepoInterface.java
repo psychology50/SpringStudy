@@ -10,6 +10,7 @@ public interface PostRepoInterface {
     Optional<Post> findById(Long id);
     List<Post> findByName(String name);
     List<Post> findAll();
+    List<Post> findAllByBlogId(Long blog_id);
     void delete(Post post);
     void deleteById(Long id);
 }

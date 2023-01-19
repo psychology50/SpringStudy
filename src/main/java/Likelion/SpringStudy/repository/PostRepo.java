@@ -43,6 +43,13 @@ public class PostRepo implements PostRepoInterface{
     }
 
     @Override
+    public List<Post> findAllByBlogId(Long blog_id) {
+        return em.createQuery("select p from Post p where p.blog.id = :blog_id", Post.class)
+                .setParameter("blog_id", blog_id)
+                .getResultList();
+    }
+
+    @Override
     public void delete(Post post) {
         em.remove(post);
     }

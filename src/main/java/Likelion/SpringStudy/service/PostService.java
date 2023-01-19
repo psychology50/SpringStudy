@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,4 +28,6 @@ public class PostService {
         }
         return postRepoInterface.save(post);
     }
+
+    public List<Post> findPosts() {return postRepoInterface.findAll();}
 }
