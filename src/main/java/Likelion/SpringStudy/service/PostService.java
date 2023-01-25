@@ -27,7 +27,6 @@ public class PostService {
         Blog blog = blogRepositoryInterface.findById(form.getBlog_id())
                 .orElseGet(Blog::new);
         post.setBlog(blog);
-        log.info("is valid");
         return postRepoInterface.save(post);
     }
 

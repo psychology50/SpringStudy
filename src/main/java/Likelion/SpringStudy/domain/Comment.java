@@ -38,4 +38,26 @@ public class Comment extends BaseEntity {
         this.id = id;
         this.content = content;
     }
+
+    public void setUser(UserDomain user) {
+        if (this.user != null) {
+            this.user = null;
+        }
+        this.user = user;
+
+        if (user != null) {
+            user.getComments().add(this);
+        }
+    }
+
+    public void setPost(Post post) {
+        if (this.post != null) {
+            this.post = null;
+        }
+        this.post = post;
+
+        if (post != null) {
+            post.getComments().add(this);
+        }
+    }
 }
