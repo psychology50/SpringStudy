@@ -5,10 +5,7 @@ import Likelion.SpringStudy.domain.Comment;
 import Likelion.SpringStudy.domain.Post;
 import Likelion.SpringStudy.domain.UserDomain;
 import Likelion.SpringStudy.dto.CommentForm;
-import Likelion.SpringStudy.repository.BlogRepositoryInterface;
-import Likelion.SpringStudy.repository.CommentRepo;
-import Likelion.SpringStudy.repository.PostRepoInterface;
-import Likelion.SpringStudy.repository.UserRepositoryInterface;
+import Likelion.SpringStudy.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -24,13 +21,17 @@ public class CommentService {
     private final PostRepoInterface postRepoInterface;
     private final CommentRepo commentRepo;
 
-    public Comment create(CommentForm form, UserDomain user, Long post_id) {
+    public Comment create(CommentForm form, Long user_id, Long post_id) {
         Comment comment = form.toEntity();
-        Post post = postRepoInterface.findById(post_id)
-                .orElseGet(Post::new);
+        Post post = postRepoInterface.findById(post_id).orElseGet(Post::new);
+        UserDomain user = userRepositoryInterface.findById(user_id).orElseGet(UserDomain::new);
         comment.setUser(user);
         comment.setPost(post);
 
         return (Comment) commentRepo.save(comment);
+    }
+
+    public void delete(Long comment_id) {
+        commentRepo.deleteById(comment_id);
     }
 }

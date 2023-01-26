@@ -1,6 +1,8 @@
 package Likelion.SpringStudy.controller;
 
+import Likelion.SpringStudy.domain.Comment;
 import Likelion.SpringStudy.domain.Post;
+import Likelion.SpringStudy.dto.CommentForm;
 import Likelion.SpringStudy.dto.PostForm;
 import Likelion.SpringStudy.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -43,11 +45,12 @@ public class PostController {
     }
 
     @GetMapping("blogs/{blog_id}/posts/{post_id}/receive")
-    public String receive(@PathVariable String blog_id,
-                          @PathVariable String post_id,
+    public String receive(@PathVariable(value="blog_id") String blog_id,
+                          @PathVariable(value="post_id") String post_id,
                           Model model) {
         Post post = postService.findById(Long.parseLong(post_id));
         model.addAttribute("post", post);
+        model.addAttribute("commentForm", new CommentForm());
         return "blogs/posts/postPage";
     }
 
