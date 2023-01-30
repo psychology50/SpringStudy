@@ -1,6 +1,5 @@
 package Likelion.SpringStudy.service;
 
-import Likelion.SpringStudy.domain.Blog;
 import Likelion.SpringStudy.domain.Comment;
 import Likelion.SpringStudy.domain.Post;
 import Likelion.SpringStudy.domain.UserDomain;
@@ -16,15 +15,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @RequiredArgsConstructor
 public class CommentService {
-    private final UserRepositoryInterface userRepositoryInterface;
-    private final BlogRepositoryInterface blogRepositoryInterface;
-    private final PostRepoInterface postRepoInterface;
+    private final UserRepo userRepo;
+    private final BlogRepo blogRepo;
+    private final PostRepo postRepo;
     private final CommentRepo commentRepo;
 
     public Comment create(CommentForm form, Long user_id, Long post_id) {
         Comment comment = form.toEntity();
-        Post post = postRepoInterface.findById(post_id).orElseGet(Post::new);
-        UserDomain user = userRepositoryInterface.findById(user_id).orElseGet(UserDomain::new);
+        Post post = postRepo.findById(post_id).orElseGet(Post::new);
+        UserDomain user = userRepo.findById(user_id).orElseGet(UserDomain::new);
         comment.setUser(user);
         comment.setPost(post);
 

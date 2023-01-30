@@ -1,7 +1,6 @@
 package Likelion.SpringStudy.repository;
 
 import Likelion.SpringStudy.domain.Blog;
-import Likelion.SpringStudy.domain.UserDomain;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.util.Assert;
 
@@ -9,9 +8,9 @@ import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
-public class BlogRepository implements BlogRepositoryInterface{
+public class BlogRepoImpl implements BlogRepo {
     private final EntityManager em;
-    public BlogRepository(EntityManager em) {this.em = em;}
+    public BlogRepoImpl(EntityManager em) {this.em = em;}
 
     @Override
     public Blog save(Blog blog) {

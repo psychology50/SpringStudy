@@ -1,7 +1,7 @@
 package Likelion.SpringStudy.config.security;
 
 import Likelion.SpringStudy.domain.UserDomain;
-import Likelion.SpringStudy.repository.UserRepositoryInterface;
+import Likelion.SpringStudy.repository.UserRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,11 +16,11 @@ import java.util.List;
 @AllArgsConstructor
 @Service("userDetailsService") // bean 등록
 public class CustomUserDetailsService implements UserDetailsService {
-    private final UserRepositoryInterface userRepositoryInterface;
+    private final UserRepo userRepo;
 
     @Override
     public UserDetails loadUserByUsername(String nickname) throws UsernameNotFoundException {
-        UserDomain userDomain = userRepositoryInterface.findByNickname(nickname).orElseThrow(() ->
+        UserDomain userDomain = userRepo.findByNickname(nickname).orElseThrow(() ->
                 new UsernameNotFoundException("해당 닉네임을 찾을 수 없습니다."));
 
         List<GrantedAuthority> roles = new ArrayList<>();

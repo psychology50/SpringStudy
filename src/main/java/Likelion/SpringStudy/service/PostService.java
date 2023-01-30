@@ -3,35 +3,34 @@ package Likelion.SpringStudy.service;
 import Likelion.SpringStudy.domain.Blog;
 import Likelion.SpringStudy.domain.Post;
 import Likelion.SpringStudy.dto.PostForm;
-import Likelion.SpringStudy.repository.BlogRepositoryInterface;
-import Likelion.SpringStudy.repository.PostRepoInterface;
+import Likelion.SpringStudy.repository.BlogRepo;
+import Likelion.SpringStudy.repository.PostRepo;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Log4j2
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class PostService {
-    private final PostRepoInterface postRepoInterface;
-    private final BlogRepositoryInterface blogRepositoryInterface;
+    private final PostRepo postRepo;
+    private final BlogRepo blogRepo;
 
     public Post create(PostForm form) {
         Post post = form.toEntity();
-        Blog blog = blogRepositoryInterface.findById(form.getBlog_id())
+        Blog blog = blogRepo.findById(form.getBlog_id())
                 .orElseGet(Blog::new);
         post.setBlog(blog);
-        return postRepoInterface.save(post);
+        return postRepo.save(post);
     }
 
-    public List<Post> findAllByBlogId(Long blog_id) {return postRepoInterface.findAllByBlogId(blog_id);}
+    public List<Post> findAllByBlogId(Long blog_id) {return postRepo.findAllByBlogId(blog_id);}
 
-    public Post findById(Long post_id) {return postRepoInterface.findById(post_id).orElseGet(Post::new);}
-    public void deleteById(Long post_id) {postRepoInterface.deleteById(post_id);}
+    public Post findById(Long post_id) {return postRepo.findById(post_id).orElseGet(Post::new);}
+    public void deleteById(Long post_id) {
+        postRepo.deleteById(post_id);}
 }

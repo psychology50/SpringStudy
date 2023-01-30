@@ -4,7 +4,7 @@ import Likelion.SpringStudy.domain.Blog;
 
 import java.util.Optional;
 
-public interface BlogRepositoryInterface {
+public interface BlogRepo {
     Blog save(Blog blog);
     Optional<Blog> findById(Long id);
     Optional<Blog> findByName(String name);

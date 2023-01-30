@@ -5,7 +5,7 @@ import Likelion.SpringStudy.domain.UserDomain;
 import java.util.List;
 import java.util.Optional;
 
-public interface UserRepositoryInterface {
+public interface UserRepo {
     UserDomain save(UserDomain userDomain);
     Optional<UserDomain> findById(Long id);
     Optional<UserDomain> findByName(String name);

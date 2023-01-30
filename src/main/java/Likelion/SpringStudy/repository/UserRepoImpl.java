@@ -8,9 +8,9 @@ import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
-public class UserRepository implements UserRepositoryInterface {
+public class UserRepoImpl implements UserRepo {
     private final EntityManager em;
-    public UserRepository(EntityManager em) {
+    public UserRepoImpl(EntityManager em) {
         this.em = em;
     }
 

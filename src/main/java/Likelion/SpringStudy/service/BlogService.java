@@ -3,10 +3,9 @@ package Likelion.SpringStudy.service;
 import Likelion.SpringStudy.domain.Blog;
 import Likelion.SpringStudy.domain.UserDomain;
 import Likelion.SpringStudy.dto.BlogForm;
-import Likelion.SpringStudy.repository.BlogRepositoryInterface;
-import Likelion.SpringStudy.repository.UserRepositoryInterface;
+import Likelion.SpringStudy.repository.BlogRepo;
+import Likelion.SpringStudy.repository.UserRepo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,11 +15,11 @@ import java.util.Optional;
 @Transactional
 @RequiredArgsConstructor
 public class BlogService {
-    private final BlogRepositoryInterface blogRepositoryInterface;
-    private final UserRepositoryInterface userRepositoryInterface;
+    private final BlogRepo blogRepo;
+    private final UserRepo userRepo;
 
     private void validateDuplicateBlog(Blog blog) {
-        blogRepositoryInterface.findByName(blog.getBlog_name())
+        blogRepo.findByName(blog.getBlog_name())
                 .ifPresent(m -> {
                     throw new IllegalStateException("이미 존재하는 블로그명입니다.");
                 });
@@ -41,19 +40,19 @@ public class BlogService {
             isPresent(userDomain);
             blog.setOwner(userDomain);
         }
-        blogRepositoryInterface.save(blog);
+        blogRepo.save(blog);
         return blog.getId();
     }
 
     public Optional<Blog> findBlog(Long blog_id) {
-        return blogRepositoryInterface.findById(blog_id);
+        return blogRepo.findById(blog_id);
     }
 
     public Optional<Blog> findBlogByUserId(Long user_id) {
-        return blogRepositoryInterface.findByUserId(user_id);
+        return blogRepo.findByUserId(user_id);
     }
 
     public void deleteBlog(Long id) {
-        blogRepositoryInterface.deleteById(id);
+        blogRepo.deleteById(id);
     }
 }

@@ -1,46 +1,70 @@
 package Likelion.SpringStudy.config;
 
 import Likelion.SpringStudy.repository.*;
-import Likelion.SpringStudy.service.CommentService;
-import Likelion.SpringStudy.service.UserService;
+import Likelion.SpringStudy.service.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.EntityManager;
-import javax.sql.DataSource;
 
 @Configuration
 @RequiredArgsConstructor
 public class SpringConfig {
     private final EntityManager em;
     private final CommentRepo commentRepo;
+    private final CategoryRepo categoryRepo;
+    private final TagRepo tagRepo;
+    private final LikeRepo likeRepo;
 
     @Bean
     public UserService userService() {
-        return new UserService(userRepositoryInterface());
+        return new UserService(userRepo());
     }
 
     @Bean
-    public UserRepositoryInterface userRepositoryInterface() {
-        return new UserRepository(em);
+    public UserRepo userRepo() {
+        return new UserRepoImpl(em);
     }
 
     @Bean
-    public BlogRepositoryInterface blogRepositoryInterface() {return new BlogRepository(em); }
+    public BlogRepo blogRepo() {return new BlogRepoImpl(em); }
 
     @Bean
-    public PostRepoInterface postRepoInterface() {return new PostRepo(em);}
+    public PostRepo postRepo() {return new PostRepoImpl(em);}
 
     @Bean
     public CommentService commentService() {
         return new CommentService(
-                userRepositoryInterface(),
-                blogRepositoryInterface(),
-                postRepoInterface(),
+                userRepo(),
+                blogRepo(),
+                postRepo(),
                 commentRepo
+        );
+    }
+
+    @Bean
+    public CategoryService categoryService() {
+        return new CategoryService(
+                postRepo(),
+                categoryRepo
+        );
+    }
+
+    @Bean
+    public TagService tagService() {
+        return new TagService(
+                postRepo(),
+                tagRepo
+        );
+    }
+
+    @Bean
+    public LikeService likeService() {
+        return new LikeService(
+                userRepo(),
+                postRepo(),
+                likeRepo
         );
     }
 }
